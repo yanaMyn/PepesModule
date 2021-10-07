@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class PepesmoduleInboxCollection, PepesmoduleInboxStatus, PepesmoduleKotlinEnumCompanion, PepesmoduleKotlinEnum<E>, PepesmoduleInboxStatusCompanion, PepesmoduleKotlinArray<T>, PepesmoduleKotlinThrowable, PepesmoduleKotlinException, PepesmoduleKotlinRuntimeException, PepesmoduleKotlinIllegalStateException;
+@class PepesmoduleKotlinThrowable, PepesmoduleKotlinArray<T>, PepesmoduleKotlinException, PepesmoduleKotlinRuntimeException, PepesmoduleKotlinIllegalStateException;
 
-@protocol PepesmoduleInboxInterface, PepesmoduleKotlinComparable, PepesmoduleKotlinIterator;
+@protocol PepesmoduleInboxList, PepesmoduleInboxInterface, PepesmoduleKotlinIterator;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -144,32 +144,24 @@ __attribute__((swift_name("KotlinBoolean")))
 + (instancetype)numberWithBool:(BOOL)value;
 @end;
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("InboxCollection")))
-@interface PepesmoduleInboxCollection : PepesmoduleBase
-- (instancetype)initWithTotal_page:(int32_t)total_page page:(int32_t)page data:(NSArray<id<PepesmoduleInboxInterface>> *)data __attribute__((swift_name("init(total_page:page:data:)"))) __attribute__((objc_designated_initializer));
-- (int32_t)component1 __attribute__((swift_name("component1()")));
-- (int32_t)component2 __attribute__((swift_name("component2()")));
-- (NSArray<id<PepesmoduleInboxInterface>> *)component3 __attribute__((swift_name("component3()")));
-- (PepesmoduleInboxCollection *)doCopyTotal_page:(int32_t)total_page page:(int32_t)page data:(NSArray<id<PepesmoduleInboxInterface>> *)data __attribute__((swift_name("doCopy(total_page:page:data:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSArray<id<PepesmoduleInboxInterface>> *data __attribute__((swift_name("data")));
-@property (readonly) int32_t page __attribute__((swift_name("page")));
-@property (readonly) int32_t total_page __attribute__((swift_name("total_page")));
-@end;
-
 __attribute__((swift_name("InboxInterface")))
 @protocol PepesmoduleInboxInterface
 @required
-@property (readonly) NSString *content __attribute__((swift_name("content")));
-@property (readonly) int64_t datetime __attribute__((swift_name("datetime")));
-@property (readonly) NSString *id __attribute__((swift_name("id")));
-@property (readonly) NSString *imageUrl __attribute__((swift_name("imageUrl")));
+@property (readonly) NSArray<id<PepesmoduleInboxList>> *data __attribute__((swift_name("data")));
 @property (readonly) NSString *message __attribute__((swift_name("message")));
-@property (readonly) PepesmoduleInboxStatus *status __attribute__((swift_name("status")));
+@property (readonly) NSString *status __attribute__((swift_name("status")));
+@end;
+
+__attribute__((swift_name("InboxList")))
+@protocol PepesmoduleInboxList
+@required
+@property (readonly) int64_t datetime __attribute__((swift_name("datetime")));
+@property (readonly) int32_t id __attribute__((swift_name("id")));
+@property (readonly) NSString *message __attribute__((swift_name("message")));
+@property (readonly) NSString *mobile __attribute__((swift_name("mobile")));
+@property (readonly) NSString *status __attribute__((swift_name("status")));
 @property (readonly) NSString *title __attribute__((swift_name("title")));
+@property (readonly) NSString *type __attribute__((swift_name("type")));
 @end;
 
 __attribute__((swift_name("InboxRemoteDataSource")))
@@ -180,47 +172,7 @@ __attribute__((swift_name("InboxRemoteDataSource")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)fetchListInboxMsisdn:(NSString *)msisdn idCategory:(int32_t)idCategory page:(int32_t)page limit:(int32_t)limit completionHandler:(void (^)(PepesmoduleInboxCollection * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("fetchListInbox(msisdn:idCategory:page:limit:completionHandler:)")));
-@end;
-
-__attribute__((swift_name("KotlinComparable")))
-@protocol PepesmoduleKotlinComparable
-@required
-- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
-@end;
-
-__attribute__((swift_name("KotlinEnum")))
-@interface PepesmoduleKotlinEnum<E> : PepesmoduleBase <PepesmoduleKotlinComparable>
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
-@property (class, readonly, getter=companion) PepesmoduleKotlinEnumCompanion *companion __attribute__((swift_name("companion")));
-- (int32_t)compareToOther:(E)other __attribute__((swift_name("compareTo(other:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *name __attribute__((swift_name("name")));
-@property (readonly) int32_t ordinal __attribute__((swift_name("ordinal")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("InboxStatus")))
-@interface PepesmoduleInboxStatus : PepesmoduleKotlinEnum<PepesmoduleInboxStatus *>
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly, getter=companion) PepesmoduleInboxStatusCompanion *companion __attribute__((swift_name("companion")));
-@property (class, readonly) PepesmoduleInboxStatus *unread __attribute__((swift_name("unread")));
-@property (class, readonly) PepesmoduleInboxStatus *read __attribute__((swift_name("read")));
-+ (PepesmoduleKotlinArray<PepesmoduleInboxStatus *> *)values __attribute__((swift_name("values()")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("InboxStatus.Companion")))
-@interface PepesmoduleInboxStatusCompanion : PepesmoduleBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) PepesmoduleInboxStatusCompanion *shared __attribute__((swift_name("shared")));
-- (PepesmoduleInboxStatus *)getParam:(NSString * _Nullable)param __attribute__((swift_name("get(param:)")));
+- (void)fetchListInboxMsisdn:(NSString *)msisdn idCategory:(int32_t)idCategory page:(int32_t)page limit:(int32_t)limit completionHandler:(void (^)(id<PepesmoduleInboxInterface> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("fetchListInbox(msisdn:idCategory:page:limit:completionHandler:)")));
 @end;
 
 __attribute__((swift_name("KotlinThrowable")))
@@ -272,15 +224,6 @@ __attribute__((swift_name("KotlinCancellationException")))
 - (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithMessage:(NSString * _Nullable)message cause:(PepesmoduleKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithCause:(PepesmoduleKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KotlinEnumCompanion")))
-@interface PepesmoduleKotlinEnumCompanion : PepesmoduleBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) PepesmoduleKotlinEnumCompanion *shared __attribute__((swift_name("shared")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
