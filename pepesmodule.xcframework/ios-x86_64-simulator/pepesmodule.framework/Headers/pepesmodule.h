@@ -155,8 +155,6 @@ __attribute__((swift_name("InboxInterface")))
 __attribute__((swift_name("InboxList")))
 @protocol PepesmoduleInboxList
 @required
-@property (readonly) int64_t datetime __attribute__((swift_name("datetime")));
-@property (readonly) int32_t id __attribute__((swift_name("id")));
 @property (readonly) NSString *message __attribute__((swift_name("message")));
 @property (readonly) NSString *mobile __attribute__((swift_name("mobile")));
 @property (readonly) NSString *status __attribute__((swift_name("status")));
