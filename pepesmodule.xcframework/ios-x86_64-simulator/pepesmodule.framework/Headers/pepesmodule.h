@@ -8,7 +8,7 @@
 
 @class PepesmoduleKotlinThrowable, PepesmoduleKotlinArray<T>, PepesmoduleKotlinException, PepesmoduleKotlinRuntimeException, PepesmoduleKotlinIllegalStateException;
 
-@protocol PepesmoduleInboxList, PepesmoduleInboxInterface, PepesmoduleKotlinIterator;
+@protocol PepesmoduleInboxListAbstract, PepesmoduleMetadataAbstract, PepesmoduleInboxAbstract, PepesmoduleKotlinIterator;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -144,22 +144,31 @@ __attribute__((swift_name("KotlinBoolean")))
 + (instancetype)numberWithBool:(BOOL)value;
 @end;
 
-__attribute__((swift_name("InboxInterface")))
-@protocol PepesmoduleInboxInterface
+__attribute__((swift_name("InboxAbstract")))
+@protocol PepesmoduleInboxAbstract
 @required
-@property (readonly) NSArray<id<PepesmoduleInboxList>> *data __attribute__((swift_name("data")));
+@property (readonly) NSArray<id<PepesmoduleInboxListAbstract>> *data __attribute__((swift_name("data")));
 @property (readonly) NSString *message __attribute__((swift_name("message")));
+@property (readonly) id<PepesmoduleMetadataAbstract> metadata __attribute__((swift_name("metadata")));
 @property (readonly) NSString *status __attribute__((swift_name("status")));
 @end;
 
-__attribute__((swift_name("InboxList")))
-@protocol PepesmoduleInboxList
+__attribute__((swift_name("InboxListAbstract")))
+@protocol PepesmoduleInboxListAbstract
 @required
 @property (readonly) NSString *message __attribute__((swift_name("message")));
 @property (readonly) NSString *mobile __attribute__((swift_name("mobile")));
 @property (readonly) NSString *status __attribute__((swift_name("status")));
 @property (readonly) NSString *title __attribute__((swift_name("title")));
 @property (readonly) NSString *type __attribute__((swift_name("type")));
+@end;
+
+__attribute__((swift_name("MetadataAbstract")))
+@protocol PepesmoduleMetadataAbstract
+@required
+@property (readonly) int32_t limit __attribute__((swift_name("limit")));
+@property (readonly) int32_t page __attribute__((swift_name("page")));
+@property (readonly) int32_t total_page __attribute__((swift_name("total_page")));
 @end;
 
 __attribute__((swift_name("InboxRemoteDataSource")))
@@ -170,7 +179,7 @@ __attribute__((swift_name("InboxRemoteDataSource")))
  @note This method converts instances of CancellationException to errors.
  Other uncaught Kotlin exceptions are fatal.
 */
-- (void)fetchListInboxMsisdn:(NSString *)msisdn idCategory:(int32_t)idCategory page:(int32_t)page limit:(int32_t)limit completionHandler:(void (^)(id<PepesmoduleInboxInterface> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("fetchListInbox(msisdn:idCategory:page:limit:completionHandler:)")));
+- (void)fetchListInboxMsisdn:(NSString *)msisdn idCategory:(int32_t)idCategory page:(int32_t)page limit:(int32_t)limit completionHandler:(void (^)(id<PepesmoduleInboxAbstract> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("fetchListInbox(msisdn:idCategory:page:limit:completionHandler:)")));
 @end;
 
 __attribute__((swift_name("KotlinThrowable")))
